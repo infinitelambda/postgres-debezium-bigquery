@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debezium-fv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debezium-container
+  template:
+    metadata:
+      labels:
+        app: debezium-container
+        tier: backend
+    spec:
+      containers:
+        - name: debezium-container
+          image: debezium-server
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8080
